@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://moodly-zeta-wine.vercel.app/",
+      "https://moodly-zeta-wine.vercel.app",
     ],
     credentials: true,
   }),
