@@ -35,11 +35,17 @@ export default function FaceExpression({onClick = ()=>{}}) {
         muted
         style={{ width: "400px", borderRadius: "12px" }}
       />
+      <div className="instruction-text">
+        <h3 style={{ marginBottom: "0.5rem" }}>Ready for your soundtrack?</h3>
+        <p style={{ color: "#94a3b8", fontSize: "0.95rem" }}>
+          Look at the camera and show us a <strong>Happy</strong>, <strong>Sad</strong>, or <strong>Surprised</strong> face!
+        </p>
+      </div>
       <h2>{expression}</h2>
       <button
         onClick={handleClick}
       >
-        Detect Expression
+         📸 Scan My Mood 
       </button>
     </div>
   );
