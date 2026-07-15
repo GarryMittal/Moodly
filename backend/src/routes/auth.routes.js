@@ -29,7 +29,7 @@ router.get('/get-me',authMiddleware.authUser,authController.getMe);
  * @description Logout the authenticated user by blacklisting the JWT token in Redis
  * @access Private
  */
-router.get('/logout',authMiddleware.authUser,authController.logoutUser);
+router.get('/logout',authController.logoutUser);
 
 
 module.exports = router;
