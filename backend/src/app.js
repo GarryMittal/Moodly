@@ -1,24 +1,29 @@
-const express = require('express');
+const express = require("express");
 
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin:'http://localhost:5173',
-    credentials:true
-}))
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://moodly-zeta-wine.vercel.app/",
+    ],
+    credentials: true,
+  }),
+);
 
 //require routes
 
-const authRouter = require('./routes/auth.routes');
-const songRouter = require('./routes/song.routes');
+const authRouter = require("./routes/auth.routes");
+const songRouter = require("./routes/song.routes");
 
 //using routes
 
-app.use('/api/auth',authRouter);
-app.use('/api/songs',songRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/songs", songRouter);
 module.exports = app;

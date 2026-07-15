@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 // const blacklistModel = require('../models/blacklist.model');
-const redis = require('../config/cache');
+const redis = require("../config/cache");
 
 const registerUser = async (req, res) => {
   try {
@@ -34,7 +34,12 @@ const registerUser = async (req, res) => {
       { expiresIn: "2d" },
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 2 * 24 * 60 * 60 * 1000,
+    });
 
     return res.status(201).json({
       message: "User registered successfully",
@@ -55,9 +60,11 @@ const loginUser = async (req, res) => {
   try {
     const { identifier, password } = req.body;
 
-    const user = await userModel.findOne({
-      $or: [{ email: identifier }, { username: identifier }],
-    }).select("+password");
+    const user = await userModel
+      .findOne({
+        $or: [{ email: identifier }, { username: identifier }],
+      })
+      .select("+password");
 
     if (!user) {
       return res.status(400).json({
@@ -78,7 +85,12 @@ const loginUser = async (req, res) => {
       { expiresIn: "2d" },
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 2 * 24 * 60 * 60 * 1000,
+    });
 
     return res.status(201).json({
       message: "User logged in successfully",
@@ -96,40 +108,41 @@ const loginUser = async (req, res) => {
 };
 
 const getMe = async (req, res) => {
-
-  try{
+  try {
     const user = await userModel.findById(req.user.id);
-  
-    res.status(200).json({
-      message:"User fetched successfully",
-      user
-    });
 
-  }catch(err)
-  {
-     return res.status(500).json({
-      message:'Internal server error'
-    })
+    res.status(200).json({
+      message: "User fetched successfully",
+      user,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal server error",
+    });
   }
 };
 
-const logoutUser = async (req,res)=>{
-
+const logoutUser = async (req, res) => {
   const token = req.cookies.token;
 
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
 
-  await redis.set(token,Date.now().toString());
+  if (token) {
+    await redis.set(token, Date.now().toString());
+  }
 
   res.status(201).json({
-    message:"Logged out successfully"
-  })
-
-}
+    message: "Logged out successfully",
+  });
+};
 
 module.exports = {
   registerUser,
   loginUser,
   getMe,
-  logoutUser
+  logoutUser,
 };
