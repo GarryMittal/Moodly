@@ -1,0 +1,86 @@
+.player {
+    width: 500px;
+    margin: 50px auto;
+    padding: 25px;
+    border-radius: 18px;
+    background: #181818;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
+
+    .song-info {
+        text-align: center;
+        margin-bottom: 25px;
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            line-height: 1.4;
+
+            /* Prevent long filenames from overflowing */
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            white-space: normal;
+
+            /* Keep it inside the player */
+            max-width: 100%;
+        }
+
+        p {
+            color: #b3b3b3;
+            text-transform: capitalize;
+        }
+    }
+
+    .progress {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        span {
+            width: 45px;
+            font-size: 14px;
+        }
+
+        input {
+            flex: 1;
+            cursor: pointer;
+        }
+    }
+
+    .controls {
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+
+        button {
+            border: none;
+            background: #1db954;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: .3s;
+
+            &:hover {
+                background: #17a74a;
+            }
+        }
+    }
+
+    .volume {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+            font-size: 18px;
+        }
+
+        input {
+            flex: 1;
+            cursor: pointer;
+        }
+    }
+}

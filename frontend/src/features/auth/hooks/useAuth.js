@@ -14,7 +14,7 @@ export const useAuth = () => {
 
       setUser(data.user);
     } catch (err) {
-      console.log(err);
+      console.error(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }
@@ -26,7 +26,7 @@ export const useAuth = () => {
       const data = await login({ identifier, password });
       setUser(data.user);
     } catch (err) {
-      console.log(err);
+      console.error(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }
@@ -38,7 +38,7 @@ export const useAuth = () => {
       const data = await getMe();
       setUser(data.user);
     } catch (err) {
-      console.log(err);
+      console.error(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,7 @@ export const useAuth = () => {
       await logout();
       setUser(null);
     } catch (err) {
-      console.log(err);
+      console.error(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }

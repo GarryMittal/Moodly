@@ -1,0 +1,71 @@
+.home {
+    min-height: 100vh;
+    padding: 50px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #151515,
+        #1f1f1f,
+        #282828
+    );
+
+    color: white;
+}
+
+.hero {
+
+    text-align: center;
+    margin-bottom: 50px;
+
+    h1 {
+        font-size: 60px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #1DB954;
+    }
+
+    p {
+        margin-top: 15px;
+        color: #b5b5b5;
+        font-size: 18px;
+        max-width: 700px;
+        margin-inline: auto;
+        line-height: 1.7;
+    }
+}
+
+.content {
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+
+    flex-wrap: wrap;
+}
+
+.camera-section {
+
+    background: rgba(255,255,255,.04);
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.player-section {
+
+    background: rgba(255,255,255,.04);
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
