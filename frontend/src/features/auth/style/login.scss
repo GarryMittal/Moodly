@@ -1,37 +1,249 @@
-.login-page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+// .login-page{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;
 
-    .form-container{
-        display:flex;
-        flex-direction: column;
-        gap:1rem;
-        padding:2rem;
-        border-radius: 0.5rem;
-        min-width: 300px;
+//     .form-container{
+//         display:flex;
+//         flex-direction: column;
+//         gap:1rem;
+//         padding:2rem;
+//         border-radius: 0.5rem;
+//         min-width: 300px;
         
-    }
+//     }
 
-    form{
-        display: flex;
-        flex-direction: column;
-        gap:1rem;
+//     form{
+//         display: flex;
+//         flex-direction: column;
+//         gap:1rem;
 
-        .form-group{
-            display: flex;
-            flex-direction: column;
-            gap:0.5rem;
+//         .form-group{
+//             display: flex;
+//             flex-direction: column;
+//             gap:0.5rem;
 
-            input{
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                border:1px solid #ccc;
-                border:none;
-                outline:none;
-            }
-        }
-    }
+//             input{
+//                 padding: 0.5rem;
+//                 border-radius: 0.25rem;
+//                 border:1px solid #ccc;
+//                 border:none;
+//                 outline:none;
+//             }
+//         }
+//     }
+// }
+@use "sass:color";
+// Brand Colors for Moodly
+$bg-color: #0b0f19;
+$card-bg: #151b2b;
+$text-light: #ffffff;
+$text-muted: #94a3b8;
+$brand-primary: #8b5cf6; // A vibrant purple for a music/mood app
+$brand-hover: #7c3aed;
+
+.login-page.moodly-theme {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at bottom right, #1e1b4b, $bg-color);
+  padding: 2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: $text-light;
 }
 
+.login-card {
+  display: flex;
+  flex-direction: column;
+  background: $card-bg;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  max-width: 950px;
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    min-height: 600px;
+  }
+}
+
+// Left Side - Moodly Panel
+.mood-panel {
+  position: relative;
+  flex: 1;
+  // A colorful, abstract background fits a mood/music app perfectly
+  background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3rem;
+  overflow: hidden;
+  
+  .overlay-gradient {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    // Darkening the overlay so the white text is highly readable
+    background: linear-gradient(135deg, rgba(11, 15, 25, 0.95) 0%, rgba(139, 92, 246, 0.6) 100%);
+    z-index: 1;
+  }
+
+  .mood-content {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    
+    .brand-name {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #c4b5fd, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+    
+    .headline {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #ddd6fe;
+      margin-bottom: 2.5rem;
+    }
+    
+    .rhyme-box {
+      border-left: 3px solid $brand-primary;
+      padding-left: 1.5rem;
+      
+      p {
+        font-size: 1.05rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: #f1f5f9;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Right Side - The Form
+.form-container {
+  flex: 1.1; // Slightly larger to give the inputs room
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $card-bg;
+  
+  .form-header {
+    margin-bottom: 2.5rem;
+    
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      color: $text-muted;
+      font-size: 0.95rem;
+    }
+  }
+
+  // --- THE FIX FOR YOUR INPUT FIELDS ---
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; // Adds space between the FormGroups
+    
+    // We target label and input inside the form to style whatever FormGroup outputs
+    label {
+      display: block; // Forces label to sit above the input
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #cbd5e1;
+    }
+    
+    input {
+      width: 100%; // Takes full width of the container
+      box-sizing: border-box; // Ensures padding doesn't break width
+      padding: 0.875rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2); // Dark, inset look
+      color: $text-light;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+      
+      &::placeholder {
+        color: #64748b;
+      }
+      
+      &:focus {
+        border-color: $brand-primary;
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  // ------------------------------------
+  
+  .action-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    
+    .button {
+      padding: 0.875rem;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &.primary-btn {
+        background: $brand-primary;
+        color: white;
+        
+        &:hover {
+          background: $brand-hover;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+        }
+      }
+      
+      &.recruiter-btn {
+        background: rgba(255, 255, 255, 0.03);
+        color: $text-light;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+      }
+    }
+  }
+  
+  .form-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: $text-muted;
+    
+    a {
+      color: $brand-primary;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: color.adjust($brand-primary, $lightness: 15%);
+        text-decoration: underline;
+      }
+    }
+  }
+}
