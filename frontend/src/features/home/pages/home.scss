@@ -1,15 +1,60 @@
-.home {
-    min-height: 100vh;
-    padding: 50px 20px;
+.navbar{
+    max-width:1200px;
+    margin:0 auto 60px;
 
-    background: linear-gradient(
-        135deg,
-        #151515,
-        #1f1f1f,
-        #282828
-    );
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    color: white;
+    h1{
+        font-size:42px;
+        font-weight:700;
+    }
+
+    .nav-right{
+        display:flex;
+        align-items:center;
+        gap:20px;
+
+        span{
+            color:#d7d7d7;
+            font-size:18px;
+        }
+
+        button{
+            border:none;
+            padding:10px 22px;
+            border-radius:50px;
+            background:#e63946;
+            color:white;
+            cursor:pointer;
+            font-weight:600;
+            transition:.3s;
+
+            &:hover{
+                background:#d62839;
+            }
+        }
+    }
+}
+.hero{
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+    h2{
+        font-size:46px;
+        margin-bottom:15px;
+    }
+
+    p{
+        color:#bbbbbb;
+        max-width:650px;
+        margin:auto;
+        line-height:1.8;
+        font-size:20px;
+    }
 }
 
 .hero {
@@ -34,38 +79,81 @@
     }
 }
 
-.content {
+.content{
 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 60px;
+    max-width:1300px;
 
-    flex-wrap: wrap;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
 }
 
-.camera-section {
+.camera-section,
+.player-section{
 
-    background: rgba(255,255,255,.04);
+    background:#232323;
 
-    padding: 25px;
+    border-radius:24px;
 
-    border-radius: 20px;
+    padding:30px;
 
-    backdrop-filter: blur(10px);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4);
 
-    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    min-height:520px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+.camera-section button{
 
-.player-section {
+    margin-top:20px;
 
-    background: rgba(255,255,255,.04);
+    border:none;
 
-    padding: 25px;
+    padding:14px 32px;
 
-    border-radius: 20px;
+    background:#1DB954;
 
-    backdrop-filter: blur(10px);
+    color:white;
 
-    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    border-radius:50px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    &:hover{
+
+        transform:translateY(-2px);
+
+        background:#17a74a;
+    }
+}
+.camera-section video{
+
+    width:100%;
+
+    max-width:420px;
+
+    border-radius:18px;
+
+    border:3px solid #1DB954;
+
+    box-shadow:0 0 35px rgba(29,185,84,.25);
+}
+.camera-section h2{
+
+    margin-top:18px;
+
+    font-size:34px;
+
+    color:#1DB954;
 }

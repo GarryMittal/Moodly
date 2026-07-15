@@ -2,10 +2,12 @@ import { useContext, useEffect } from "react";
 
 import { login, register, getMe, logout } from "../services/auth.api";
 import { AuthContext } from "../auth.context";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   const { user, setUser, loading, setLoading } = context;
+  const navigate = useNavigate();
   
   const handleRegister = async ({ username, email, password }) => {
     setLoading(true);
@@ -49,6 +51,7 @@ export const useAuth = () => {
     try {
       await logout();
       setUser(null);
+      navigate("/login");
     } catch (err) {
       console.error(err.response?.data?.message || err.message);
     } finally {
@@ -56,9 +59,9 @@ export const useAuth = () => {
     }
   };
 
-  useEffect(()=>{
-    handleGetMe();
-  },[])
+  // useEffect(()=>{
+  //   handleGetMe();
+  // },[])
 
   return ({
     user,

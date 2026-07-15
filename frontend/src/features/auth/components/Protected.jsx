@@ -1,9 +1,19 @@
+import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 const Protected = ({ children }) => {
-  const { loading, user } = useAuth();
-//   const navigate = useNavigate();
+  const { loading, user, handleGetMe } = useAuth();
+  //   const navigate = useNavigate();
+  // useEffect(() => {
+  //   handleGetMe();
+  // }, []);
 
+  useEffect(() => {
+    if (user === null) {
+      handleGetMe();
+    }
+  }, [user]);
+  
   if (loading) {
     return <h1>Loading...</h1>;
   }

@@ -3,47 +3,44 @@ import "./home.scss";
 import FaceExpression from "../../Expression/components/FaceExpression";
 import Player from "../components/Player";
 import { useSong } from "../hooks/useSong";
-
+import { useAuth } from "../../auth/hooks/useAuth";
 const Home = () => {
+  const { handleGetSong } = useSong();
+  const { user, handleLogout } = useAuth();
 
-    const { handleGetSong } = useSong();
+  return (
+    <main className="home">
+      <nav className="navbar">
+        <h1>Moodly 🎵</h1>
 
-    return (
-        <main className="home">
+        <div className="nav-right">
+          <span>Hello, {user?.username}</span>
 
-            <div className="hero">
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </nav>
+      <div className="hero">
+        <h2>Your Emotion. Your Music.</h2>
 
-                <h1>Moodly 🎵</h1>
+        <p>
+          AI detects your facial expression and instantly recommends the perfect
+          song.
+        </p>
+      </div>
 
-                <p>
-                    Discover music that matches your emotions using AI-powered
-                    facial expression detection.
-                </p>
+      <div className="content">
+        <div className="camera-section">
+          <FaceExpression
+            onClick={(expression) => handleGetSong({ mood: expression })}
+          />
+        </div>
 
-            </div>
-
-            <div className="content">
-
-                <div className="camera-section">
-
-                    <FaceExpression
-                        onClick={(expression) =>
-                            handleGetSong({ mood: expression })
-                        }
-                    />
-
-                </div>
-
-                <div className="player-section">
-
-                    <Player />
-
-                </div>
-
-            </div>
-
-        </main>
-    );
+        <div className="player-section">
+          <Player />
+        </div>
+      </div>
+    </main>
+  );
 };
 
 export default Home;
